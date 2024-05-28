@@ -1,0 +1,55 @@
+[
+  {
+    "model": "cms.region",
+    "pk": 2,
+    "fields": {
+      "name": "Casablanca",
+      "slug": "casablanca",
+      "status": "ACTIVE",
+      "administrative_division": "CITY",
+      "aliases": {
+        "Casablanca": {
+          "latitude": 49.450938,
+          "longitude": 11.075269
+        }
+      },
+      "fallback_translations_enabled": false,
+      "short_urls_enabled": true,
+      "page_permissions_enabled": true,
+      "latitude": 49.455288,
+      "longitude": 11.0766198,
+      "postal_code": "90403",
+      "admin_mail": "helmallouky@digex.com",
+      "created_date": "2019-08-12T07:50:05.572Z",
+      "last_updated": "2019-08-12T07:50:05.573Z",
+      "offers": []
+    }
+  },
+  {
+    "model": "cms.region",
+    "pk": 3,
+    "fields": {
+      "name": "Rabat",
+      "slug": "rabat",
+      "status": "ACTIVE",
+      "administrative_division": "CITY",
+      "aliases": {
+        "Rabat": {
+          "latitude": 49.450938,
+          "longitude": 11.075269
+        }
+      },
+      "fallback_translations_enabled": false,
+      "short_urls_enabled": true,
+      "page_permissions_enabled": true,
+      "latitude": 49.455288,
+      "longitude": 11.0766198,
+      "postal_code": "90403",
+      "admin_mail": "helmallouky@digex.ma",
+      "created_date": "2019-08-12T07:50:05.572Z",
+      "last_updated": "2019-08-12T07:50:05.573Z",
+      "offers": []
+    }
+  }
+
+]

@@ -49,7 +49,7 @@ def transform_poi(poi: POI | None) -> dict[str, Any]:
         }
     return {
         "id": poi.id,
-        "name": poi.default_public_translation.title,
+        "name": None, #poi.default_public_translation.title, # solution temporarily
         "address": poi.address,
         "town": poi.city,
         "state": None,

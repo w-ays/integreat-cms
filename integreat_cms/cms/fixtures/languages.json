@@ -1,0 +1,65 @@
+[
+  {
+    "model": "cms.language",
+    "pk": 1,
+    "fields": {
+      "slug": "de",
+      "bcp47_tag": "de-DE",
+      "english_name": "German",
+      "native_name": "Deutsch",
+      "text_direction": "LEFT_TO_RIGHT",
+      "primary_country_code": "de",
+      "table_of_contents": "Inhaltsverzeichnis",
+      "created_date": "2019-08-12T07:50:18.139Z",
+      "last_updated": "2019-08-12T07:50:18.140Z",
+      "message_content_not_available": "Die Seite existiert nicht in der ausgewählten Sprache. Sie ist aber in diesen Sprachen verfügbar:",
+      "message_partial_live_content_not_available": "Ein Teil der Seite existiert nicht in der ausgewählten Sprache. Er ist aber in diesen Sprachen verfügbar:"
+    }
+  },
+  {
+    "model": "cms.language",
+    "pk": 2,
+    "fields": {
+      "slug": "en",
+      "bcp47_tag": "en-GB",
+      "english_name": "English",
+      "native_name": "English",
+      "text_direction": "LEFT_TO_RIGHT",
+      "primary_country_code": "gb",
+      "secondary_country_code": "us",
+      "table_of_contents": "Table of Contents",
+      "created_date": "2019-08-12T07:50:24.635Z",
+      "last_updated": "2019-08-12T07:50:24.636Z"
+    }
+  },
+  {
+    "model": "cms.language",
+    "pk": 3,
+    "fields": {
+      "slug": "ar",
+      "bcp47_tag": "ar-arb",
+      "english_name": "Arabic",
+      "native_name": "العربية",
+      "text_direction": "RIGHT_TO_LEFT",
+      "primary_country_code": "ab",
+      "table_of_contents": "محتويات",
+      "created_date": "2019-08-12T07:51:29.233Z",
+      "last_updated": "2019-08-12T07:51:29.233Z"
+    }
+  },
+  {
+    "model": "cms.language",
+    "pk": 4,
+    "fields": {
+      "slug": "fr",
+      "bcp47_tag": "fr-FR",
+      "english_name": "French",
+      "native_name": "Français",
+      "text_direction": "LEFT_TO_RIGHT",
+      "primary_country_code": "fr",
+      "table_of_contents": "Table des matières",
+      "created_date": "2019-08-12T07:51:29.233Z",
+      "last_updated": "2019-08-12T07:51:29.233Z"
+    }
+  }
+]

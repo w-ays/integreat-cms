@@ -93,6 +93,8 @@ class Event(AbstractContentModel):
     )
     start = models.DateTimeField(verbose_name=_("start"))
     end = models.DateTimeField(verbose_name=_("end"))
+    src = models.CharField(max_length=255, verbose_name=_("src"), blank=True)
+    src_id = models.CharField(max_length=255, verbose_name=_("src id"), blank=True)
     #: If the event is recurring, the recurrence rule contains all necessary information on the frequency, interval etc.
     #: which is needed to calculate the single instances of a recurring event
     recurrence_rule = models.OneToOneField(

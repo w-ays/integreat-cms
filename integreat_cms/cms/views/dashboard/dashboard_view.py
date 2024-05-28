@@ -239,7 +239,7 @@ class DashboardView(TemplateView, ChatContextMixin):
         drafted_pages = PageTranslation.objects.filter(
             id__in=self.latest_version_ids,
             status=status.DRAFT,
-            language__slug=self.request.region.default_language.slug,
+            language__slug=self.request.region.default_language.slug, #None #to fix it need to insert default lang of a region in languagetreenode
         )
         single_drafted_page = drafted_pages.first()
         return {
