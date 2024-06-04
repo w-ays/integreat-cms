@@ -4,6 +4,7 @@ This module includes functions related to the event API endpoint.
 
 from __future__ import annotations
 
+import logging
 from datetime import datetime, timedelta
 from typing import TYPE_CHECKING
 
@@ -11,6 +12,8 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.utils import timezone
 from django.utils.html import strip_tags
+
+from django.core.paginator import Paginator
 
 from ..decorators import json_response
 from .locations import transform_poi
@@ -179,16 +182,7 @@ def transform_event_recurrences(
 @json_response
 # pylint: disable=unused-argument
 def events(request: HttpRequest, region_slug: str, language_slug: str) -> JsonResponse:
-    """
-    List all events of the region and transform result into JSON
-
-    :param request: The current request
-    :param region_slug: The slug of the requested region
-    :param language_slug: The slug of the requested language
-    :return: JSON object according to APIv3 events endpoint definition
-    """
     region = request.region
-    # Throw a 404 error when the language does not exist or is disabled
     region.get_language_or_404(language_slug, only_active=True)
 
     result: list[dict[str, str | int | None]] = []
@@ -216,6 +210,26 @@ def events(request: HttpRequest, region_slug: str, language_slug: str) -> JsonRe
                     transform_event_translation(event_translation, poi_translation)
                 )
 
+    # Create a Paginator object
+    paginator = Paginator(result, request.GET.get("per_page"))  # Show 10 events per page # request.GET.get("perPage")
+
+    # Get the page number from the request
+    page_number = request.GET.get('page')
+
+
+
+    # Get the events for the requested page
+    page_obj = paginator.get_page(page_number)
+
+    # Create the pagination information
+    pagination_info = {
+        "total": paginator.count,
+        "perPage": paginator.per_page,
+        "currentPage": page_obj.number,
+        "nextPage": page_obj.next_page_number() if page_obj.has_next() else None,
+        "lastPage": paginator.num_pages,
+    }
+
     return JsonResponse(
-        result, safe=False
+        { 'pagination': pagination_info, 'events': page_obj.object_list}, safe=False
     )  # Turn off Safe-Mode to allow serializing arrays

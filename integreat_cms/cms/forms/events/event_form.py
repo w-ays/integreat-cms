@@ -180,16 +180,17 @@ class EventForm(CustomModelForm):
                             code="invalid",
                         ),
                     )
-            elif end_date - start_date > timedelta(settings.MAX_EVENT_DURATION - 1):
-                self.add_error(
-                    "end_date",
-                    forms.ValidationError(
-                        _(
-                            "The maximum duration for events is {} days. Consider using recurring events if the event is not continuous."
-                        ).format(settings.MAX_EVENT_DURATION),
-                        code="invalid",
-                    ),
-                )
+            # disable restriction for event duration
+            # elif end_date - start_date > timedelta(settings.MAX_EVENT_DURATION - 1):
+            #     self.add_error(
+            #         "end_date",
+            #         forms.ValidationError(
+            #             _(
+            #                 "The maximum duration for events is {} days. Consider using recurring events if the event is not continuous."
+            #             ).format(settings.MAX_EVENT_DURATION),
+            #             code="invalid",
+            #         ),
+            #     )
         # If everything looks good until now, combine the dates and times into timezone-aware datetimes
         if not self.errors:
             tzinfo = zoneinfo.ZoneInfo(self.instance.timezone)
