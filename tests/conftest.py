@@ -79,7 +79,7 @@ def load_test_data_transactional(
     :param django_db_blocker: The fixture providing the database blocker
     """
     with django_db_blocker.unblock():
-        call_command("loaddata", "integreat_cms/cms/fixtures/test_roles.json")
+        call_command("loaddata", "integreat_cms/cms/fixtures/roles.json")
         call_command("loaddata", "integreat_cms/cms/fixtures/test_data.json")
 
 

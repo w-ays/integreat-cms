@@ -11,6 +11,7 @@ require_database
 
 #cp "${PACKAGE_DIR}/static/src/logos/integreat/integreat-logo.png" "${PACKAGE_DIR}/media/global/integreat-logo.png"
 #cp "${PACKAGE_DIR}/static/src/logos/malte/malte-logo.png" "${PACKAGE_DIR}/media/global/malte-logo.png"
-deescalate_privileges integreat-cms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/regions.json" --verbosity "${SCRIPT_VERBOSITY}"
+deescalate_privileges integreat-cms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/init_data.json" --verbosity "${SCRIPT_VERBOSITY}"
 
-echo "✔ Imported test data" | print_success
+
+echo "✔ Imported init data" | print_success
