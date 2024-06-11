@@ -1,5 +1,26 @@
 [
   {
+  "model": "cms.User",
+  "pk": 1,
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$VUZGcFNTVzd0ODV0ZEEyTlpRV3hVSQ$5aA2ku42QFzo6ql5jGEL7FE4KO1loSbTLRuhAtrsl1w",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "SuperAdmin",
+    "first_name": "Hassan",
+    "last_name": "Mall",
+    "email": "helmallouky@digex.ma",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2022-01-01T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": [],
+    "organization": null,
+    "regions": [],
+    "expert_mode": false
+  }
+},
+  {
     "model": "cms.language",
     "pk": 1,
     "fields": {

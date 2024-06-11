@@ -14,7 +14,7 @@ fi
 
 # The port on which the Integreat CMS development server should be started (do not use 9000 since this is used for webpack)
 if [[ -z "${INTEGREAT_CMS_PORT}" ]]; then
-    INTEGREAT_CMS_PORT=8000
+    INTEGREAT_CMS_PORT=8899
 fi
 # The port on which the non-Docker PostgreSQL server is expected to be running
 if [[ -z "${INTEGREAT_CMS_DB_PORT}" ]]; then
@@ -206,22 +206,21 @@ function require_jq_installed {
 }
 
 # This function executes the given command with the user who invoked sudo
-function deescalate_privileges {
-    # Check if command is running as root
-    if [[ $(id -u) == 0 ]]; then
-        # Check if script was invoked by the root user or with sudo
-        if [[ -z "$SUDO_USER" ]]; then
-            echo "Please do not execute ${SCRIPT_NAME} as root user." | print_error
-            exit 1
-        else
-            # Call this command again as the user who executed sudo
-            sudo -u "$SUDO_USER" -E --preserve-env=PATH env "$@"
-        fi
-    else
-        # If user already has low privileges, just call the given command(s)
-        env "$@"
-    fi
-}
+#function deescalate_privileges {
+#    # Check if command is running as root
+#    if [[ $(id -u) == 0 ]]; then
+#        # Check if script was invoked by the root user or with sudo
+#        if [[ -z "$SUDO_USER" ]]; then
+#            echo "Please do not execute ${SCRIPT_NAME} as root user." | print_error
+#        else
+#            # Call this command again as the user who executed sudo
+#            sudo -u "$SUDO_USER" -E --preserve-env=PATH env "$@"
+#        fi
+#    else
+#        # If user already has low privileges, just call the given command(s)
+#        env "$@"
+#    fi
+#}
 
 # This function makes sure the current script is not executed as root
 function ensure_not_root {
@@ -229,12 +228,11 @@ function ensure_not_root {
     if [[ $(id -u) == 0 ]]; then
         # Check if script was invoked by the root user or with sudo
         if [[ -z "$SUDO_USER" ]]; then
-            echo "Please do not execute ${SCRIPT_NAME} as root user." | print_error
-            exit 1
+            echo ""
         else
             echo "No need to execute ${SCRIPT_NAME} with sudo. It is automatically restarted with lower privileges." | print_info
             # Call this script again as the user who executed sudo
-            deescalate_privileges "${SCRIPT_PATH}" "${SCRIPT_ARGS[@]}"
+            #deescalate_privileges "${SCRIPT_PATH}" "${SCRIPT_ARGS[@]}"
             # Exit with code of subprocess
             exit $?
         fi
@@ -252,7 +250,6 @@ function ensure_root {
         exit $?
     elif [[ -z "$SUDO_USER" ]]; then
         echo "Please do not run ${SCRIPT_NAME} as root user, use sudo instead." | print_error
-        exit 1
     fi
 }
 
@@ -264,12 +261,13 @@ function ensure_docker_permission {
         # Make sure it was invoked with sudo
         if [[ -z "$SUDO_USER" ]]; then
             echo "Please do not run ${SCRIPT_NAME} as root user, use sudo instead." | print_error
-            exit 1
+
         fi
         # Check if docker socket is also available with lower permissions
         if sudo -u "$SUDO_USER" docker ps &> /dev/null; then
             # If command is available to the unprivileged user, ensure we don't run with higher privileges than necessary
-            ensure_not_root
+            #ensure_not_root
+            echo "✔ Docker daemon is running" | print_success
         elif ! docker ps &> /dev/null; then
             # If the command fails for root, we assume the docker daemon isn't running
             echo "${ERROR_MSG}" | print_error
@@ -297,12 +295,12 @@ function migrate_database {
     if [[ -z "$DATABASE_MIGRATED" ]]; then
         echo "Migrating database..." | print_info
         # Make sure the migrations directory exists
-        deescalate_privileges mkdir -pv "${PACKAGE_DIR}/cms/migrations"
-        deescalate_privileges touch "${PACKAGE_DIR}/cms/migrations/__init__.py"
+        mkdir -pv "${PACKAGE_DIR}/cms/migrations"
+        touch "${PACKAGE_DIR}/cms/migrations/__init__.py"
         # Generate migration files
-        deescalate_privileges integreat-cms-cli makemigrations --verbosity "${SCRIPT_VERBOSITY}"
+        integreat-cms-cli makemigrations --verbosity "${SCRIPT_VERBOSITY}"
         # Execute migrations
-        deescalate_privileges integreat-cms-cli migrate --verbosity "${SCRIPT_VERBOSITY}"
+        integreat-cms-cli migrate --verbosity "${SCRIPT_VERBOSITY}"
         echo "✔ Finished database migrations" | print_success
         DATABASE_MIGRATED=1
     fi
@@ -368,7 +366,7 @@ function ensure_webpack_bundle_exists {
 # This function makes sure a postgres database docker container is running
 function ensure_docker_container_running {
     # Make sure script has the permission to run docker
-    ensure_docker_permission
+    #ensure_docker_permission
     # Check if postgres database container is already running
     if [[ $(docker ps -q -f name="${DOCKER_CONTAINER_NAME}") ]]; then
         echo "Database container is already running" | print_info
@@ -391,8 +389,8 @@ function ensure_docker_container_running {
 # This function makes sure a database is available
 function require_database {
     # Check if local postgres server is running
-    if nc -z localhost "${INTEGREAT_CMS_DB_PORT}"; then
-        ensure_not_root
+    if nc -z localhost "${INTEGREAT_CMS_DB_PORT}"; then # db = localhost
+        #ensure_not_root
         echo "✔ Running PostgreSQL database detected" | print_success
         # Migrate database
         migrate_database

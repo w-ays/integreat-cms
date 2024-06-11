@@ -57,7 +57,7 @@ fi
 # Check if postgres instance is running on host system or database backend is installed 
 if ! { [[ -x "$(command -v docker)" ]] || [[ -x "$(command -v psql)" ]] || nc -z localhost 5432 > /dev/null 2>&1; }; then
     echo "In order to run the database, you need either Docker (recommended) or PostgreSQL. Please install at least one of them manually and run this script again."
-    exit 1
+
 fi
 # Define the required npm version
 required_npm_version="7"

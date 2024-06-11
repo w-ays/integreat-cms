@@ -26,7 +26,7 @@ if [[ "$*" != *"--fast"* ]]; then
     # Migrate database
     migrate_database
     # Updating translation file
-    deescalate_privileges bash "${DEV_TOOL_DIR}/translate.sh"
+    bash "${DEV_TOOL_DIR}/translate.sh"
 fi
 
 # Check if compiled webpack output exists
@@ -36,7 +36,7 @@ fi
 
 # Starting WebPack dev server in background
 echo -e "Starting WebPack dev server in background..." | print_info | print_prefix "webpack" 36
-deescalate_privileges npm run dev 2>&1 | print_prefix "webpack" 36 &
+npm run dev 2>&1 | print_prefix "webpack" 36 &
 
 # Waiting for initial WebPack dev build
 while [[ -z $(compgen -G "${PACKAGE_DIR}/static/dist/main.*.js") ]]; do
@@ -47,4 +47,4 @@ done
 listen_for_devserver &
 
 # Start Integreat CMS development webserver
-deescalate_privileges integreat-cms-cli runserver "localhost:${INTEGREAT_CMS_PORT}"
+integreat-cms-cli runserver "localhost:${INTEGREAT_CMS_PORT}"
