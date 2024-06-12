@@ -6,8 +6,8 @@ set -e
 # Configuration
 IMAGE_NAME="events"
 CONTAINER_NAME="events-container"
-PORT=${1:-8000}
-export EVENTS_VOLUME_PATH="/home/hassan/events_images"
+PORT=8001
+EVENTS_VOLUME_PATH="/home/hassan/events_images"
 NETWORK="host"
 
 # Check if the Docker image exists
@@ -39,7 +39,7 @@ check_container() {
 # Run the Docker container
 run_container() {
     echo "Running Docker container..."
-    docker run --name $CONTAINER_NAME -p $PORT:8000 -v $EVENTS_VOLUME_PATH:/code/integreat_cms/media --network $NETWORK $IMAGE_NAME
+    docker run -d --name $CONTAINER_NAME -p $PORT:8000 -v $EVENTS_VOLUME_PATH:/code/integreat_cms/media/global --network $NETWORK $IMAGE_NAME
 }
 
 # Main script
