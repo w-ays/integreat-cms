@@ -14,7 +14,7 @@ fi
 
 # The port on which the Integreat CMS development server should be started (do not use 9000 since this is used for webpack)
 if [[ -z "${INTEGREAT_CMS_PORT}" ]]; then
-    INTEGREAT_CMS_PORT=8899
+    INTEGREAT_CMS_PORT=8000
 fi
 # The port on which the non-Docker PostgreSQL server is expected to be running
 if [[ -z "${INTEGREAT_CMS_DB_PORT}" ]]; then

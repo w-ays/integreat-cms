@@ -47,4 +47,4 @@ done
 listen_for_devserver &
 
 # Start Integreat CMS development webserver
-integreat-cms-cli runserver "localhost:${INTEGREAT_CMS_PORT}"
+integreat-cms-cli runserver "0.0.0.0:${INTEGREAT_CMS_PORT}"

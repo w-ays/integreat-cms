@@ -18,7 +18,7 @@ RUN apt-get update && \
 
 
 COPY . /code/
-RUN mkdir -p /code/integreat_cms/media
+RUN mkdir -p /code/integreat_cms/media/global
 
 RUN chmod +x /code/tools/install.sh
 RUN chmod +x /code/tools/migrate.sh
@@ -36,5 +36,5 @@ RUN service postgresql start && \
     /code/tools/migrate.sh --python python3.11 && \
     /code/tools/load_init_data.sh --python python3.11
 
-EXPOSE 8899
+EXPOSE 8000
 CMD service postgresql start && /code/tools/run.sh --python python3.11

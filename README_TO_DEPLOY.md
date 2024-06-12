@@ -18,12 +18,13 @@ Or if you don't wanna change anything :
 
 1. Build docker image:
 ```bash
-     docker build -t events-app
+     docker build -t <image-name>
     
    ```
 2. Run docker image in background
 ```bash
      docker run -v path/to/save/events/images:/code/integreat_cms/media --network host events
+     
     
    ```
 
