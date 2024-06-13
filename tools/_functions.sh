@@ -380,8 +380,6 @@ function ensure_docker_container_running {
             create_docker_container
             # Migrate database
             migrate_database
-            # Import test data
-            bash "${DEV_TOOL_DIR}/loadtestdata.sh"
         fi
     fi
 }
