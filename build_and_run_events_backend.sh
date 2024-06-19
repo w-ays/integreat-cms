@@ -11,7 +11,7 @@ export EVENTS_VOLUME_PATH="/home/hassan/events/" # Change this to your own path 
 # Check if the Docker image exists
 check_image() {
     echo "Checking Docker image..."
-    if [ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]; then
+    if ["$(docker images -q $IMAGE_NAME 2> /dev/null)" == ""]; then
         return 1
     else
         return 0
@@ -27,7 +27,7 @@ build_image() {
 # Check if the Docker container is running
 check_container() {
     echo "Checking Docker container..."
-    if [ "$(docker ps -q -f name=$CONTAINER_NAME 2> /dev/null)" == "" ]; then
+    if ["$(docker ps -q -f name=$CONTAINER_NAME 2> /dev/null)" == ""]; then
         return 1
     else
         return 0
