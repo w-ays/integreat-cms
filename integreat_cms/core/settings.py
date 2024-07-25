@@ -469,7 +469,7 @@ DEFAULT_AUTO_FIELD: Final[str] = "django.db.models.BigAutoField"
 
 #: This is a security measure to prevent HTTP Host header attacks, which are possible even under many seemingly-safe
 #: web server configurations (see :setting:`django:ALLOWED_HOSTS` and :ref:`django:host-headers-virtual-hosting`)
-ALLOWED_HOSTS: Final[list[str]] = [HOSTNAME, ".localhost", "127.0.0.1", "[::1]"] + [
+ALLOWED_HOSTS: Final[list[str]] = [HOSTNAME, ".localhost", "127.0.0.1", "[::1]" , "*"] + [
     x.strip()
     for x in os.environ.get("INTEGREAT_CMS_ALLOWED_HOSTS", "").splitlines()
     if x

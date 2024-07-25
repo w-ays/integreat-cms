@@ -7,7 +7,6 @@ set -e
 IMAGE_NAME="events-backend-app"
 CONTAINER_NAME="events-backend-app-container"
 export EVENTS_VOLUME_PATH="/home/hassan/events/" # Change this to your own path of the events images volume
-
 # Check if the Docker image exists
 check_image() {
     echo "Checking Docker image..."
@@ -37,7 +36,7 @@ check_container() {
 # Run the Docker container # Must use 8000 as external port otherwise images won't load
 run_container() {
     echo "Running Docker container..."
-    docker run -d --name $CONTAINER_NAME -p 8000:8000 -p 5433:5432 -v $EVENTS_VOLUME_PATH:/code/integreat_cms/media/global $IMAGE_NAME
+    docker run -d --name $CONTAINER_NAME -p 8000:8000 -v $EVENTS_VOLUME_PATH:/code/integreat_cms/media/global $IMAGE_NAME
 }
 
 # Main script

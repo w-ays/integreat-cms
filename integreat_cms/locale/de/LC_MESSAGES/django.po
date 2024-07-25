@@ -1793,15 +1793,6 @@ msgstr ""
 msgid "The end of the event can't be before the start of the event"
 msgstr "Das Ende der Veranstaltung kann nicht vor seinem Beginn sein"
 
-#: cms/forms/events/event_form.py
-msgid ""
-"The maximum duration for events is {} days. Consider using recurring events "
-"if the event is not continuous."
-msgstr ""
-"Die maximale Veranstaltungsdauer beträgt {} Tage. Verwenden Sie "
-"wiederkehrende Veranstaltungen, wenn die Veranstaltung nicht kontinuierlich "
-"stattfindet."
-
 #: cms/forms/events/recurrence_rule_form.py
 msgid "Recurrence ends"
 msgstr "Wiederholung endet"
@@ -2566,6 +2557,14 @@ msgstr "Beginn"
 #: cms/models/events/event.py
 msgid "end"
 msgstr "Ende"
+
+#: cms/models/events/event.py
+msgid "src"
+msgstr ""
+
+#: cms/models/events/event.py
+msgid "src id"
+msgstr ""
 
 #: cms/models/events/event.py cms/models/events/recurrence_rule.py
 msgid "recurrence rule"
@@ -9944,6 +9943,14 @@ msgid "This page belongs to another region ({})."
 msgstr ""
 "Diese Seite konnte nicht importiert werden, da sie zu einer anderen Region "
 "gehört ({})."
+
+#~ msgid ""
+#~ "The maximum duration for events is {} days. Consider using recurring "
+#~ "events if the event is not continuous."
+#~ msgstr ""
+#~ "Die maximale Veranstaltungsdauer beträgt {} Tage. Verwenden Sie "
+#~ "wiederkehrende Veranstaltungen, wenn die Veranstaltung nicht "
+#~ "kontinuierlich stattfindet."
 
 #~ msgid "Find more information about this"
 #~ msgstr "Mehr Informationen finden Sie"
